@@ -12,20 +12,22 @@ class Terminal {
   constructor() {
     this.terminalOutput = '';
     this.userInput = '';
-    this.introText = "You(the user) are walked up to the house's large front door";
+    this.introText = "Initializing ... [Company Name] Terminal Boot-Up Sequence";
     this.actionPatterns = [
-      { pattern: /knock\s*(on)?\s*the?\s*door/, response: "You knock on the door. No one answers." },
+      { pattern: /(knock|bang)\s*(on)?\s*the?\s*door/, response: "You knock on the door. No one answers." },
       { pattern: /turn\s*(the)?\s*(doorknob|handle)/, response: "You turn the handle, but the door is locked." },
-      { pattern: /check\s*(the)?\s*window/, response: "You peek through the window and see a shadow moving inside." }
+      { pattern: /(check|inspect)\s*(the)?\s*window/, response: "You peek through the window and see a shadow moving inside." },
+      { pattern: /walk\s*(to)?\s*(the)?\s*(back|backyard)/, response: "You walk around towards the back of the house."}
+      
     ];
   }
 
-  // Method to display text in the terminal
+  // Display text in the terminal
   displayText(text) {
     console.log(text);
   }
 
-  // Method to handle user input
+  // Handle user input
   handleInput(input) {
     this.userInput = input.toLowerCase(); // Convert input to lowercase for case-insensitivity
 
@@ -61,7 +63,7 @@ class Terminal {
   // Method to handle story progression after knocking on the door
   afterKnocking() {
     this.displayText("You realize that the house has been abandoned for a long time. You notice the hinges are coming loose.");
-    this.displayText("What would you like to do next?");
+    this.displayText("What do you do next?");
     this.displayText("- Kick the door");
     this.displayText("- Check the windows");
     this.displayText("- Go around the house");
@@ -72,25 +74,22 @@ class Terminal {
 
 
 
-class startGame {
+class GameManager {
   constructor() {
-    this.introText = ''
+    this.player = null;
+    this.terminal = null;
   }
-  intro(){
-    console.log(`Initializing 
-[Company name] 
--------------------
 
-
-Welcome user, please enter your name...
-`)
+  startGame() {
+    console.log(this.terminal.introText);
+    // Initialize player and terminal here
+  }
 }
-
   
 }
-const start = new startGame
-start.intro()
-const message = 'Terminal'
+const gameManager = new GameManager();
+gameManager.startGame();
+console.log('terminal')
 
 // Update header text
 document.querySelector('#header').innerHTML = message;
