@@ -87,12 +87,30 @@ class GameManager {
 }
   
 }
+// Instantiate the GameManager
 const gameManager = new GameManager();
-gameManager.startGame();
-console.log('terminal')
 
-// Update header text
-document.querySelector('#header').innerHTML = message;
+// Handle key press event for user input
+function handleKeyPress(event) {
+  if (event.key === 'Enter') {
+    const userInput = document.getElementById('user-input').value;
+    gameManager.terminal.handleInput(userInput);
+    document.getElementById('user-input').value = ''; // Clear the input field
+  }
+}
 
-// Log to console
-console.log(message);
+// Function to update terminal output in the HTML container
+function updateTerminalOutput(output) {
+  const terminalContainer = document.getElementById('terminal-container');
+  terminalContainer.innerHTML += output + '<br>';
+}
+
+// Overriding the displayText method in the Terminal class to update terminal output in HTML
+Terminal.prototype.displayText = function(text) {
+  updateTerminalOutput(text);
+}
+
+// Start the game when the page loads
+window.onload = function() {
+  gameManager.startGame();
+}
